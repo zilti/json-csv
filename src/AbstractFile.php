@@ -24,9 +24,14 @@ abstract class AbstractFile
      *
      * @param string $filepath
      */
-    public function __construct($filepath)
+    public function __construct($filepath, $data = null)
     {
-        [$this->filename, $this->data] = [pathinfo($filepath, PATHINFO_FILENAME), file_get_contents($filepath)];
+        if($data === null) {
+            [$this->filename, $this->data] = [pathinfo($filepath, PATHINFO_FILENAME), file_get_contents($filepath)];
+        } else {
+            $this->filename = $filepath;
+            $this->data = $data;
+        }
     }
 
     /**
